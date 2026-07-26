@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar-SA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>سماسكو - SMASCO</title>
+    
+    
+    <meta name="description" content="الشركة السعودية لحلول القوى البشرية - سماسكو">
+    <meta name="keywords" content="سماسكو, SMASCO, القوى البشرية, السعودية">
+    
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="سماسكو - SMASCO">
+    <meta property="og:description" content="الشركة السعودية لحلول القوى البشرية">
+    <meta property="og:image" content="https://yourwebsite.com/image/smasco-share.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:site_name" content="SMASCO">
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="سماسكو - SMASCO">
+    <meta name="twitter:description" content="الشركة السعودية لحلول القوى البشرية">
+    <meta name="twitter:image" content="https://yourwebsite.com/image/smasco-share.jpg">
+    
+   
+    <link rel="icon" type="image/png" href="image/smasco.png">
+    <link rel="apple-touch-icon" href="image/smasco.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Tajawal', sans-serif;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0, 166, 81, 0.04), rgba(0, 166, 81, 0.1));
+            animation: float 20s infinite ease-in-out;
+            filter: blur(40px);
+        }
+
+        .circle:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: -150px;
+            right: -150px;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+
+        .circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 5s;
+            animation-duration: 30s;
+        }
+
+        .circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: 10%;
+            animation-delay: 10s;
+            animation-duration: 20s;
+        }
+
+        .circle:nth-child(4) {
+            width: 350px;
+            height: 350px;
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 15s;
+            animation-duration: 28s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.4;
+            }
+            25% {
+                transform: translate(50px, -50px) scale(1.2);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-30px, 30px) scale(0.8);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translate(30px, 50px) scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        .logo-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            animation: logoAppear 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes logoAppear {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+                filter: blur(20px);
+            }
+            50% {
+                transform: scale(1.15) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .logo {
+            width: 220px;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(0, 166, 81, 0.2));
+            animation: logoFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 5;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.02);
+            }
+        }
+
+       
+        .glow-ring {
+            position: absolute;
+            border-radius: 50%;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        .glow-ring:nth-child(1) {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(0, 166, 81, 0.15) 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .glow-ring:nth-child(2) {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(0, 166, 81, 0.1) 0%, transparent 70%);
+            animation-delay: 1.3s;
+        }
+
+        .glow-ring:nth-child(3) {
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(0, 166, 81, 0.08) 0%, transparent 70%);
+            animation-delay: 2.6s;
+        }
+
+        @keyframes glowPulse {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+       
+        .rotating-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 166, 81, 0.15);
+        }
+
+        .rotating-ring:nth-child(4) {
+            width: 350px;
+            height: 350px;
+            animation: rotate 20s linear infinite;
+        }
+
+        .rotating-ring:nth-child(5) {
+            width: 380px;
+            height: 380px;
+            animation: rotateReverse 25s linear infinite;
+            border-style: dashed;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateReverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+            z-index: 10;
+            animation: loadingFadeIn 1.2s ease-out 0.8s both;
+        }
+
+        @keyframes loadingFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 166, 81, 0.4);
+            box-shadow: 0 0 10px rgba(0, 166, 81, 0.6);
+            animation: particleFloat 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            width: 6px;
+            height: 6px;
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+            animation-duration: 12s;
+        }
+
+        .particle:nth-child(2) {
+            width: 4px;
+            height: 4px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 3s;
+            animation-duration: 15s;
+        }
+
+        .particle:nth-child(3) {
+            width: 5px;
+            height: 5px;
+            top: 80%;
+            left: 30%;
+            animation-delay: 6s;
+            animation-duration: 18s;
+        }
+
+        .particle:nth-child(4) {
+            width: 7px;
+            height: 7px;
+            top: 40%;
+            left: 70%;
+            animation-delay: 9s;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(5) {
+            width: 4px;
+            height: 4px;
+            top: 30%;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 16s;
+        }
+
+        .particle:nth-child(6) {
+            width: 6px;
+            height: 6px;
+            top: 70%;
+            left: 60%;
+            animation-delay: 8s;
+            animation-duration: 13s;
+        }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translate(150px, -150px) scale(1.5);
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 1;
+            }
+        }
+
+       
+        .fade-out {
+            animation: fadeOut 1s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(1.1);
+                filter: blur(10px);
+            }
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .logo {
+                width: 180px;
+            }
+
+            .glow-ring:nth-child(1) {
+                width: 280px;
+                height: 280px;
+            }
+
+            .glow-ring:nth-child(2) {
+                width: 240px;
+                height: 240px;
+            }
+
+            .glow-ring:nth-child(3) {
+                width: 200px;
+                height: 200px;
+            }
+
+            .rotating-ring:nth-child(4) {
+                width: 300px;
+                height: 300px;
+            }
+
+            .rotating-ring:nth-child(5) {
+                width: 320px;
+                height: 320px;
+            }
+
+            .progress-bar {
+                width: 200px;
+            }
+
+            .circle:nth-child(1) {
+                width: 300px;
+                height: 300px;
+            }
+
+            .circle:nth-child(2) {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 150px;
+            }
+
+            .glow-ring:nth-child(1) {
+                width: 240px;
+                height: 240px;
+            }
+
+            .glow-ring:nth-child(2) {
+                width: 200px;
+                height: 200px;
+            }
+
+            .glow-ring:nth-child(3) {
+                width: 160px;
+                height: 160px;
+            }
+
+            .rotating-ring {
+                display: none;
+            }
+
+            .progress-bar {
+                width: 180px;
+                height: 2px;
+            }
+
+            .circle {
+                filter: blur(30px);
+            }
+
+            .particle {
+                width: 3px !important;
+                height: 3px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-screen" id="splashScreen">
+        
+        <div class="animated-bg">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+
+        
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        
+        <div class="logo-container">
+            <div class="glow-ring"></div>
+            <div class="glow-ring"></div>
+            <div class="glow-ring"></div>
+            <div class="rotating-ring"></div>
+            <div class="rotating-ring"></div>
+            <img src="image/smasco.png" alt="سماسكو" class="logo">
+        </div>
+    </div>
+
+    <script>
+        
+        setTimeout(function() {
+            const splashScreen = document.getElementById('splashScreen');
+            splashScreen.classList.add('fade-out');
+            
+            
+            setTimeout(function() {
+                window.location.href = 'info.html';
+            }, 1000);
+        }, 5000);
+
+        
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
+</body>
+</html>
